@@ -243,25 +243,49 @@ public class SistemaImpl implements Sistema{
 
 	@Override
 	public void modificarMago(String nombre) {
-		// TODO Auto-generated method stub
 		
+		//pendiente
 	}
 
 	@Override
 	public void eliminarMago(String nombre) {
-		// TODO Auto-generated method stub
+		
+		Mago mago = buscarMagoPorNombre(nombre);
+		if (mago != null) {
+			magos.remove(mago);
+			guardarMagos();
+			System.out.println("Mago eliminado correctamente.");
+		} else {
+			System.out.println("No existe un mago con ese nombre.");
+		}
 		
 	}
 
 	@Override
 	public void modificarHechizo(String nombre) {
-		// TODO Auto-generated method stub
 		
+		//pendiente
 	}
 
 	@Override
 	public void eliminarHechizo(String nombre) {
-		// TODO Auto-generated method stub
+		
+		Hechizo hechizo = buscarHechizoPorNombre(nombre);
+		
+		if (hechizo != null) {
+			hechizos.remove(hechizo);
+			
+			for (Mago mago : magos) {
+				mago.eliminarHechizo(nombre);
+			}
+			
+			guardarHechizos();
+			guardarMagos();
+			
+			System.out.println("Hechizo eliminado correctamente.");
+		} else {
+			System.out.println("No existe un hechizo con ese nombre.");
+		}
 		
 	}
 

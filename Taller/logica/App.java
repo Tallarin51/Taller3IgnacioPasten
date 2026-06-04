@@ -97,6 +97,35 @@ public class App {
 	    }
 
 	    private static void menuPrincipal(Sistema sistema) {
+	    	String respuesta;
+	    	
+	    	do {
+	            System.out.println("\n===== SISTEMA DE MAGOS =====");
+	            System.out.println("1. Panel Administrador");
+	            System.out.println("2. Panel Analista");
+	            System.out.println("3. Salir");
+	            System.out.print("Seleccione una opción: ");
+	    	
+	            respuesta = s.nextLine();
+	            
+	            switch (respuesta) {
+	            
+	            case "1":
+	            	menuAdministrador(sistema);
+	            	break;
+	            case "2":
+	            	menuAnalista(sistema);
+	            	break;
+	            case "3":
+	            	System.out.println("Saliendo del sistema...");
+	            default:
+	            	System.out.println("Opción inválida.");
+	            	break;
+	            	
+	            }
+	            
+	    	} while (!respuesta.equals("3"));
+	    
 	    }
 
 	    private static void menuAdministrador(Sistema sistema) {
