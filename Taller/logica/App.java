@@ -104,7 +104,7 @@ public class App {
 	            System.out.println("1. Panel Administrador");
 	            System.out.println("2. Panel Analista");
 	            System.out.println("3. Salir");
-	            System.out.print("Seleccione una opción: ");
+	            System.out.print("> ");
 	    	
 	            respuesta = s.nextLine();
 	            
@@ -118,6 +118,7 @@ public class App {
 	            	break;
 	            case "3":
 	            	System.out.println("Saliendo del sistema...");
+	            	break;
 	            default:
 	            	System.out.println("Opción inválida.");
 	            	break;
@@ -129,9 +130,103 @@ public class App {
 	    }
 
 	    private static void menuAdministrador(Sistema sistema) {
+	    	String respuesta;
+	    	
+	    	 do {
+	    	        System.out.println("\n===== PANEL ADMINISTRADOR =====");
+	    	        System.out.println("1. Agregar Mago");
+	    	        System.out.println("2. Modificar Mago");
+	    	        System.out.println("3. Eliminar Mago");
+	    	        System.out.println("4. Agregar Hechizo");
+	    	        System.out.println("5. Modificar Hechizo");
+	    	        System.out.println("6. Eliminar Hechizo");
+	    	        System.out.println("7. Volver");
+	    	        System.out.print("> ");
+	    	        
+	    	        respuesta = s.nextLine();
+	    	        
+	    	        switch (respuesta) {
+	    	        
+	    	        case "1":
+	    	        	//agregarMago (sistema)
+	    	        	break;
+	    	        case "2":
+	    	        	System.out.println("Ingrese el nombre del mago a modificar: ");
+	    	        	sistema.modificarMago(s.nextLine());
+	    	        	break;
+	    	        case "3":
+	    	        	System.out.println("Ingrese el nombre del mago a eliminar: ");
+	    	        	sistema.eliminarMago(s.nextLine());
+	    	        	break;
+	    	        case "4":
+	    	        	//agregarHechizo(sistema)
+	    	        	break;
+	    	        case "5":
+	    	        	System.out.println("Ingrese el nombre del hechizo a modificar: ");
+	    	        	sistema.modificarHechizo(s.nextLine());
+	    	        	break;
+	    	        case "6":
+	    	        	System.out.println("Ingrese el nombre del hechizo a eliminar: ");
+	    	        	sistema.eliminarHechizo(s.nextLine());
+	    	        	break;
+	    	        case "7":
+	    	        	System.out.println("Volviendo al menú principal...");
+	    	        	break;
+	    	        default:
+	    	        	System.out.println("Opción inválida.");
+	    	        	break;
+	    	        }
+	    	        
+	    	        
+	    	 } while (respuesta.equals("7"));
 	    }
 
 	    private static void menuAnalista(Sistema sistema) {
+	    	
+	    	String respuesta;
+	    	
+	    	 do {
+	    	        System.out.println("\n===== PANEL ANALISTA =====");
+	    	        System.out.println("1. Top 10 Mejores Hechizos");
+	    	        System.out.println("2. Top 3 Mejores Magos");
+	    	        System.out.println("3. Mostrar todos los Hechizos");
+	    	        System.out.println("4. Mostrar todos los Magos");
+	    	        System.out.println("5. Mostrar todos los Hechizos junto a su puntuación");
+	    	        System.out.println("6. Mostrar todos los Magos junto a su puntuación");
+	    	        System.out.println("7. Volver");
+	    	        System.out.print("> ");
+	    	        
+	    	        respuesta = s.nextLine();
+	    	        
+	    	        switch (respuesta) {
+	    	        
+	    	        case "1":
+	    	        	sistema.mostrarTop10Hechizos();
+	    	        	break;
+	    	        case "2":
+	    	        	sistema.mostrarTop3Magos();
+	    	        	break;
+	    	        case "3":
+	    	        	sistema.mostrarTodosLosHechizos();
+	    	        	break;
+	    	        case "4":
+	    	        	sistema.mostrarTodosLosMagos();
+	    	        	break;
+	    	        case "5":
+	    	        	sistema.mostrarHechizosConPuntuacion();
+	    	        	break;
+	    	        case "6":
+	    	        	sistema.mostrarMagosConPuntuacion();
+	    	        	break;
+	    	        case "7":
+	    	        	System.out.println("Volviendo al menú principal...");
+	    	        	break;
+	    	        default:
+	    	        	System.out.println("Opción inválida");
+	    	        	break;
+	    	        }
+	    	
+	    	 } while (!respuesta.equals("7"));
 	    }
 
 }
