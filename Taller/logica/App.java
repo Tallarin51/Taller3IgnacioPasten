@@ -335,6 +335,10 @@ public class App {
 	            respuesta = s.nextLine();
 
 	        } while (respuesta.equalsIgnoreCase("s"));
+	        
+	        if (magoNuevo.getHechizos().isEmpty()) {
+	            System.out.println("No se puede dejar un mago sin hechizos.");
+	            return; }
 
 	        sistema.modificarMago(nombreActual, magoNuevo);
 	    }
@@ -370,6 +374,10 @@ public class App {
 	            respuesta = s.nextLine();
 
 	        } while (respuesta.equalsIgnoreCase("s"));
+	        
+	        if (mago.getHechizos().isEmpty()) {
+	            System.out.println("No se puede agregar un mago sin hechizos.");
+	            return; }
 
 	        sistema.agregarMago(mago);
 	        sistema.guardarMagos();
