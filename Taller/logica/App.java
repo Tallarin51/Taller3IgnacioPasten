@@ -1,5 +1,7 @@
 package logica;
 
+//Ignacio Antonio Pastén Durán 22.067.577-7 ICCI
+
 import dominio.*;
 import java.io.*;
 import java.util.Scanner;
@@ -148,22 +150,20 @@ public class App {
 	    	        switch (respuesta) {
 	    	        
 	    	        case "1":
-	    	        	//agregarMago (sistema)
+	    	        	agregarMagoDesdeMenu(sistema);
 	    	        	break;
 	    	        case "2":
-	    	        	System.out.println("Ingrese el nombre del mago a modificar: ");
-	    	        	sistema.modificarMago(s.nextLine());
+	    	        	modificarMagoDesdeMenu(sistema);
 	    	        	break;
 	    	        case "3":
 	    	        	System.out.println("Ingrese el nombre del mago a eliminar: ");
 	    	        	sistema.eliminarMago(s.nextLine());
 	    	        	break;
 	    	        case "4":
-	    	        	//agregarHechizo(sistema)
+	    	        	agregarHechizoDesdeMenu(sistema);
 	    	        	break;
 	    	        case "5":
-	    	        	System.out.println("Ingrese el nombre del hechizo a modificar: ");
-	    	        	sistema.modificarHechizo(s.nextLine());
+	    	        	modificarHechizoDesdeMenu(sistema);
 	    	        	break;
 	    	        case "6":
 	    	        	System.out.println("Ingrese el nombre del hechizo a eliminar: ");
@@ -178,10 +178,206 @@ public class App {
 	    	        }
 	    	        
 	    	        
-	    	 } while (respuesta.equals("7"));
+	    	 } while (!respuesta.equals("7"));
 	    }
 
-	    private static void menuAnalista(Sistema sistema) {
+	    private static void agregarHechizoDesdeMenu(Sistema sistema) {
+	    	
+	    	System.out.print("Ingrese el nombre del hechizo: ");
+	        String nombre = s.nextLine();
+
+	        if (sistema.buscarHechizoPorNombre(nombre) != null) {
+	            System.out.println("Ya existe un hechizo con ese nombre.");
+	            return;
+	        }
+
+	        System.out.print("Ingrese el tipo del hechizo (Fuego/Tierra/Planta/Agua): ");
+	        String tipo = s.nextLine();
+
+	        System.out.print("Ingrese el daño del hechizo: ");
+	        int daño = Integer.parseInt(s.nextLine());
+
+	        if (tipo.equalsIgnoreCase("Fuego")) {
+	            System.out.print("Ingrese duración de quemadura: ");
+	            int duracionQuemadura = Integer.parseInt(s.nextLine());
+
+	            sistema.agregarHechizo(new HechizoFuego(nombre, daño, duracionQuemadura));
+
+	        } else if (tipo.equalsIgnoreCase("Tierra")) {
+	            System.out.print("Ingrese mejora de defensa: ");
+	            int mejoraDefensa = Integer.parseInt(s.nextLine());
+
+	            sistema.agregarHechizo(new HechizoTierra(nombre, daño, mejoraDefensa));
+
+	        } else if (tipo.equalsIgnoreCase("Planta")) {
+	            System.out.print("Ingrese duración de stun: ");
+	            int duracionStun = Integer.parseInt(s.nextLine());
+
+	            System.out.print("Ingrese cantidad de plantas: ");
+	            int cantPlantas = Integer.parseInt(s.nextLine());
+
+	            sistema.agregarHechizo(new HechizoPlanta(nombre, daño, duracionStun, cantPlantas));
+
+	        } else if (tipo.equalsIgnoreCase("Agua")) {
+	            System.out.print("Ingrese cantidad de heal: ");
+	            int cantidadHeal = Integer.parseInt(s.nextLine());
+
+	            System.out.print("Ingrese presión de agua: ");
+	            int presionAgua = Integer.parseInt(s.nextLine());
+
+	            sistema.agregarHechizo(new HechizoAgua(nombre, daño, cantidadHeal, presionAgua));
+
+	        } else {
+	            System.out.println("Tipo de hechizo inválido.");
+	            return;
+	        }
+
+	        sistema.guardarHechizos();
+
+	        System.out.println("Hechizo agregado correctamente.");
+	    }
+
+		private static void modificarHechizoDesdeMenu(Sistema sistema) {
+	    	
+	    	System.out.print("Ingrese el nombre del hechizo a modificar: ");
+	        String nombreActual = s.nextLine();
+
+	        Hechizo hechizoExistente = sistema.buscarHechizoPorNombre(nombreActual);
+
+	        if (hechizoExistente == null) {
+	            System.out.println("No existe un hechizo con ese nombre.");
+	            return;
+	        }
+
+	        System.out.print("Ingrese el nuevo nombre del hechizo: ");
+	        String nuevoNombre = s.nextLine();
+
+	        System.out.print("Ingrese el nuevo tipo del hechizo (Fuego/Tierra/Planta/Agua): ");
+	        String tipo = s.nextLine();
+
+	        System.out.print("Ingrese el nuevo daño del hechizo: ");
+	        int daño = Integer.parseInt(s.nextLine());
+
+	        Hechizo hechizoNuevo = null;
+
+	        if (tipo.equalsIgnoreCase("Fuego")) {
+	            System.out.print("Ingrese duración de quemadura: ");
+	            int duracionQuemadura = Integer.parseInt(s.nextLine());
+
+	            hechizoNuevo = new HechizoFuego(nuevoNombre, daño, duracionQuemadura);
+
+	        } else if (tipo.equalsIgnoreCase("Tierra")) {
+	            System.out.print("Ingrese mejora de defensa: ");
+	            int mejoraDefensa = Integer.parseInt(s.nextLine());
+
+	            hechizoNuevo = new HechizoTierra(nuevoNombre, daño, mejoraDefensa);
+
+	        } else if (tipo.equalsIgnoreCase("Planta")) {
+	            System.out.print("Ingrese duración de stun: ");
+	            int duracionStun = Integer.parseInt(s.nextLine());
+
+	            System.out.print("Ingrese cantidad de plantas: ");
+	            int cantPlantas = Integer.parseInt(s.nextLine());
+
+	            hechizoNuevo = new HechizoPlanta(nuevoNombre, daño, duracionStun, cantPlantas);
+
+	        } else if (tipo.equalsIgnoreCase("Agua")) {
+	            System.out.print("Ingrese cantidad de heal: ");
+	            int cantidadHeal = Integer.parseInt(s.nextLine());
+
+	            System.out.print("Ingrese presión de agua: ");
+	            int presionAgua = Integer.parseInt(s.nextLine());
+
+	            hechizoNuevo = new HechizoAgua(nuevoNombre, daño, cantidadHeal, presionAgua);
+
+	        } else {
+	            System.out.println("Tipo de hechizo inválido.");
+	            return;
+	        }
+
+	        sistema.modificarHechizo(nombreActual, hechizoNuevo);
+	    }
+	    	
+
+		private static void modificarMagoDesdeMenu(Sistema sistema) {
+	    	
+	    	System.out.print("Ingrese el nombre del mago a modificar: ");
+	        String nombreActual = s.nextLine();
+
+	        Mago magoExistente = sistema.buscarMagoPorNombre(nombreActual);
+
+	        if (magoExistente == null) {
+	            System.out.println("No existe un mago con ese nombre.");
+	            return;
+	        }
+
+	        System.out.print("Ingrese el nuevo nombre del mago: ");
+	        String nuevoNombre = s.nextLine();
+
+	        Mago magoNuevo = new Mago(nuevoNombre);
+
+	        String respuesta;
+
+	        do {
+	            System.out.print("Ingrese el nombre del hechizo que dominará: ");
+	            String nombreHechizo = s.nextLine();
+
+	            Hechizo hechizo = sistema.buscarHechizoPorNombre(nombreHechizo);
+
+	            if (hechizo != null) {
+	                magoNuevo.agregarHechizo(hechizo);
+	                System.out.println("Hechizo agregado al mago.");
+	            } else {
+	                System.out.println("No existe ese hechizo.");
+	            }
+
+	            System.out.print("¿Desea agregar otro hechizo? (s/n): ");
+	            respuesta = s.nextLine();
+
+	        } while (respuesta.equalsIgnoreCase("s"));
+
+	        sistema.modificarMago(nombreActual, magoNuevo);
+	    }
+	    	
+
+		private static void agregarMagoDesdeMenu(Sistema sistema) {
+	    	System.out.print("Ingrese el nombre del mago: ");
+	        String nombre = s.nextLine();
+
+	        if (sistema.buscarMagoPorNombre(nombre) != null) {
+	            System.out.println("Ya existe un mago con ese nombre.");
+	            return;
+	        }
+
+	        Mago mago = new Mago(nombre);
+
+	        String respuesta;
+
+	        do {
+	            System.out.print("Ingrese el nombre del hechizo que domina: ");
+	            String nombreHechizo = s.nextLine();
+
+	            Hechizo hechizo = sistema.buscarHechizoPorNombre(nombreHechizo);
+
+	            if (hechizo != null) {
+	                mago.agregarHechizo(hechizo);
+	                System.out.println("Hechizo agregado al mago.");
+	            } else {
+	                System.out.println("No existe ese hechizo.");
+	            }
+
+	            System.out.print("¿Desea agregar otro hechizo? (s/n): ");
+	            respuesta = s.nextLine();
+
+	        } while (respuesta.equalsIgnoreCase("s"));
+
+	        sistema.agregarMago(mago);
+	        sistema.guardarMagos();
+
+	        System.out.println("Mago agregado correctamente.");
+	    }			
+
+		private static void menuAnalista(Sistema sistema) {
 	    	
 	    	String respuesta;
 	    	

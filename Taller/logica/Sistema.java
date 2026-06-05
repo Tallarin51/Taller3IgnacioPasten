@@ -9,12 +9,13 @@ public interface Sistema {
 
     void agregarMago(Mago mago);
 
-    void modificarMago(String nombre);
+    void modificarMago(String nombreActual, Mago magoNuevo);
+    
 
     void eliminarMago(String nombre);
 
-    void modificarHechizo(String nombre);
-
+    void modificarHechizo(String nombreActual, Hechizo hechizoNuevo);
+    
     void eliminarHechizo(String nombre);
 
     void guardarHechizos();

@@ -2,7 +2,6 @@ package logica;
 
 import dominio.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.*;
@@ -11,7 +10,6 @@ public class SistemaImpl implements Sistema{
 	
 	private ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	private ArrayList<Mago> magos = new ArrayList<Mago>();
-	private Scanner s = new Scanner(System.in);
 	
 	
 	@Override
@@ -194,7 +192,7 @@ public class SistemaImpl implements Sistema{
 	public void mostrarHechizosConPuntuacion() {
 		
 		if (hechizos.isEmpty()) {
-			System.out.println("No hay archivos registrados.");
+			System.out.println("No hay hechizos registrados.");
 		} else {
 			for (Hechizo hechizo : hechizos) {
 				System.out.println(hechizo.getNombre() + " | Tipo: " + hechizo.getTipo()
@@ -241,11 +239,8 @@ public class SistemaImpl implements Sistema{
 		magos.add(mago);
 	}
 
-	@Override
-	public void modificarMago(String nombre) {
-		
-		//pendiente
-	}
+	
+	
 
 	@Override
 	public void eliminarMago(String nombre) {
@@ -261,11 +256,7 @@ public class SistemaImpl implements Sistema{
 		
 	}
 
-	@Override
-	public void modificarHechizo(String nombre) {
-		
-		//pendiente
-	}
+	
 
 	@Override
 	public void eliminarHechizo(String nombre) {
@@ -299,6 +290,46 @@ public class SistemaImpl implements Sistema{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public void modificarMago(String nombreActual, Mago magoNuevo) {
+		 Mago mago = buscarMagoPorNombre(nombreActual);
+
+		    if (mago != null) {
+		        int posicion = magos.indexOf(mago);
+		        magos.set(posicion, magoNuevo);
+		        guardarMagos();
+		        System.out.println("Mago modificado correctamente.");
+		    } else {
+		        System.out.println("No existe un mago con ese nombre.");
+		    }
+	}
+
+	@Override
+	public void modificarHechizo(String nombreActual, Hechizo hechizoNuevo) {
+		Hechizo hechizo = buscarHechizoPorNombre(nombreActual);
+
+	    if (hechizo != null) {
+	        int posicion = hechizos.indexOf(hechizo);
+	        hechizos.set(posicion, hechizoNuevo);
+
+	        for (Mago mago : magos) {
+	            for (int i = 0; i < mago.getHechizos().size(); i++) {
+	                if (mago.getHechizos().get(i).getNombre().equalsIgnoreCase(nombreActual)) {
+	                    mago.getHechizos().set(i, hechizoNuevo);
+	                }
+	            }
+	        }
+
+	        guardarHechizos();
+	        guardarMagos();
+
+	        System.out.println("Hechizo modificado correctamente.");
+	    } else {
+	        System.out.println("No existe un hechizo con ese nombre.");
+	    }
+		
 	}
 	
 }
