@@ -25,7 +25,7 @@ Cada hechizo pertenece a un tipo elemental: Fuego, Tierra, Planta o Agua. Según
 ```txt
 Taller3IgnacioPasten
 │
-├── src
+├── Taller
 │   ├── dominio
 │   │   ├── Hechizo.java
 │   │   ├── HechizoFuego.java
