@@ -82,7 +82,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
-	//Muestra los 10 hechizos con mayor puntuación.
+	//Muestra los 10 hechizos con mayor puntuación.   
 	public void mostrarTop10Hechizos() {
 		
 		if (hechizos.isEmpty()) {
