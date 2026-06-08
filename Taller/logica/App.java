@@ -10,6 +10,8 @@ public class App {
 	
 	private static Scanner s = new Scanner(System.in);
 	
+	//Inicia el programa, crea el sistema, carga los archivos de hechizos y magos,
+	//y muestra el menú principal.
 	public static void main(String[] args) {
 		
 		Sistema sistema = new SistemaImpl();
@@ -21,7 +23,7 @@ public class App {
 		
 		
 	}
-	
+		//Lee los hechizos desde el archivo Hechizos.txt y los agrega al sistema.
 		private static void leerHechizos(Sistema sistema) {
 		 try {
 				
@@ -63,7 +65,7 @@ public class App {
 				System.out.println("No se encontró el archivo");
 			}
 	    }
-
+		//Lee los magos desde el archivo Magos.txt y les asigna sus hechizos.
 	    private static void leerMagos(Sistema sistema) {
 	    	
 			try {
@@ -97,7 +99,7 @@ public class App {
 				System.out.println("No se encontró el archivo.");
 			}
 	    }
-
+	    //Muestra el menú principal del programa.
 	    private static void menuPrincipal(Sistema sistema) {
 	    	String respuesta;
 	    	
@@ -130,7 +132,7 @@ public class App {
 	    	} while (!respuesta.equals("3"));
 	    
 	    }
-
+	    //Muestra el menú administrador para gestionar magos y hechizos.
 	    private static void menuAdministrador(Sistema sistema) {
 	    	String respuesta;
 	    	
@@ -180,7 +182,7 @@ public class App {
 	    	        
 	    	 } while (!respuesta.equals("7"));
 	    }
-
+	    //Solicita los datos de un hechizo nuevo y lo agrega al sistema.
 	    private static void agregarHechizoDesdeMenu(Sistema sistema) {
 	    	
 	    	System.out.print("Ingrese el nombre del hechizo: ");
@@ -236,7 +238,7 @@ public class App {
 
 	        System.out.println("Hechizo agregado correctamente.");
 	    }
-
+	    // Solicita los datos actualizados de un hechizo y lo modifica en el sistema.
 		private static void modificarHechizoDesdeMenu(Sistema sistema) {
 	    	
 	    	System.out.print("Ingrese el nombre del hechizo a modificar: ");
@@ -297,8 +299,7 @@ public class App {
 
 	        sistema.modificarHechizo(nombreActual, hechizoNuevo);
 	    }
-	    	
-
+		//Solicita los datos actualizados de un mago y lo modifica en el sistema.
 		private static void modificarMagoDesdeMenu(Sistema sistema) {
 	    	
 	    	System.out.print("Ingrese el nombre del mago a modificar: ");
@@ -342,8 +343,7 @@ public class App {
 
 	        sistema.modificarMago(nombreActual, magoNuevo);
 	    }
-	    	
-
+		// Solicita los datos de un mago nuevo y lo agrega al sistema.
 		private static void agregarMagoDesdeMenu(Sistema sistema) {
 	    	System.out.print("Ingrese el nombre del mago: ");
 	        String nombre = s.nextLine();
@@ -384,7 +384,7 @@ public class App {
 
 	        System.out.println("Mago agregado correctamente.");
 	    }			
-
+		//Muestra el menú analista para consultar listados, tops y puntuaciones.
 		private static void menuAnalista(Sistema sistema) {
 	    	
 	    	String respuesta;

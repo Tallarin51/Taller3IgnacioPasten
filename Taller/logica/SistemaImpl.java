@@ -13,6 +13,7 @@ public class SistemaImpl implements Sistema{
 	
 	
 	@Override
+	//Guarda todos los hechizos actuales en Hechizos.txt.
 	public void guardarHechizos() {
 		
 		try {
@@ -52,6 +53,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Guarda todos los magos actuales en Magos.txt.
 	public void guardarMagos() {
 		
 		try {
@@ -79,9 +81,8 @@ public class SistemaImpl implements Sistema{
 		
 	}
 
-	
-
 	@Override
+	//Muestra los 10 hechizos con mayor puntuación.
 	public void mostrarTop10Hechizos() {
 		
 		if (hechizos.isEmpty()) {
@@ -123,6 +124,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Muestra los 3 magos con mayor puntuación.
 	public void mostrarTop3Magos() {
 		 if (magos.isEmpty()) {
 		        System.out.println("No hay magos registrados.");
@@ -163,6 +165,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Muestra todos los hechizos registrados.
 	public void mostrarTodosLosHechizos() {
 		
 		if (hechizos.isEmpty()) {
@@ -176,6 +179,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Muestra todos los magos registrados.
 	public void mostrarTodosLosMagos() {
 		
 		if (magos.isEmpty()) {
@@ -189,6 +193,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Muestra todos los hechizos junto a su puntuación.
 	public void mostrarHechizosConPuntuacion() {
 		
 		if (hechizos.isEmpty()) {
@@ -204,6 +209,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Muestra todos los magos junto a su puntuación.
 	public void mostrarMagosConPuntuacion() {
 		
 		if (magos.isEmpty()) {
@@ -216,6 +222,7 @@ public class SistemaImpl implements Sistema{
 		
 	}
 	
+	//Busca un hechizo por su nombre dentro de la lista de hechizos.
 	public Hechizo buscarHechizoPorNombre(String nombre) {
 		
 		for (Hechizo hechizo : hechizos) {
@@ -229,20 +236,20 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Agrega un hechizo a la lista de hechizos.
 	public void agregarHechizo(Hechizo hechizo) {
 		
 		hechizos.add(hechizo);
 	}
 
 	@Override
+	//Agrega un mago a la lista de magos.
 	public void agregarMago(Mago mago) {
 		magos.add(mago);
 	}
 
-	
-	
-
 	@Override
+	//Elimina un mago del sistema y actualiza el archivo.
 	public void eliminarMago(String nombre) {
 		
 		Mago mago = buscarMagoPorNombre(nombre);
@@ -256,9 +263,8 @@ public class SistemaImpl implements Sistema{
 		
 	}
 
-	
-
 	@Override
+	//Elimina un hechizo del sistema y de todos los magos que lo dominan.
 	public void eliminarHechizo(String nombre) {
 		
 		Hechizo hechizo = buscarHechizoPorNombre(nombre);
@@ -281,6 +287,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Busca un mago por su nombre dentro de la lista de magos.
 	public Mago buscarMagoPorNombre(String nombre) {
 		
 		for (Mago mago : magos) {
@@ -293,6 +300,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Reemplaza un mago existente por uno con datos actualizados.
 	public void modificarMago(String nombreActual, Mago magoNuevo) {
 		 Mago mago = buscarMagoPorNombre(nombreActual);
 
@@ -307,6 +315,7 @@ public class SistemaImpl implements Sistema{
 	}
 
 	@Override
+	//Reemplaza un hechizo existente y actualiza los magos que lo dominan.
 	public void modificarHechizo(String nombreActual, Hechizo hechizoNuevo) {
 		Hechizo hechizo = buscarHechizoPorNombre(nombreActual);
 
